@@ -1,0 +1,21 @@
+{
+  "name": "2022-06-29",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "yargs": "^17.5.1"
+  }
+}
