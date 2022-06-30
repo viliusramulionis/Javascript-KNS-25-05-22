@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Sugeneruokite masyvą, kurio reikšmės atsitiktinės raidės A, B, C ir D, o ilgis 200. 
+        //Suskaičiuokite kiek yra kiekvienos raidės.
+
+        const rand = (min, max) => {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min); 
+        }
+
+        const letters = 'ABCD'
+        const array = []
+        let a = 0
+        let b = 0
+        let c = 0
+        let d = 0
+
+        for(let i = 0; i < 200; i++) {
+            const letter = letters[rand(0, letters.length - 1)]
+
+            if(letter === 'A')
+                a++
+
+            if(letter === 'B')
+                b++
+
+            if(letter === 'C')
+                c++
+
+            if(letter === 'D')
+                d++
+
+            array[array.length] = letter
+        }
+
+        array.sort()
+
+        document.write('Išrūšiuotas masyvas: ', array)
+    </script>
+</body>
+</html>

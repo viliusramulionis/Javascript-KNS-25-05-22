@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Užduočių sprendimai</title>
+</head>
+<body>
+    <script>
+        //Sugeneruokite stringą, kurį sudarytų 50 atsitiktinių skaičių nuo 1 iki 200, atskirtų tarpais. 
+        //Skaičiai turi būti unikalūs (t.y. nesikartoti). Sugeneruokite antrą stringą, pasinaudodami pirmu, 
+        //palikdami jame tik pirminius skaičius (t.y tokius, kurie dalinasi be liekanos tik iš 1 ir patys savęs). 
+        //Skaičius stringe sudėliokite didėjimo tvarka, nuo mažiausio iki didžiausio.
+
+        const rand = (min, max) => {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min); 
+        }
+
+        const array = []
+        const primary = []
+
+        while(array.length <= 50) {
+            const number = rand(1, 200)
+            let prime = true
+
+            if(array.includes(number))
+                continue
+
+            array[array.length] = number
+
+            for (let i = 2; i < number; i++) {
+                if (number % i == 0) {
+                    prime = false
+                }
+            }
+
+            if(prime) {
+                primary[primary.length] = number
+            }
+        } 
+
+        array.sort((a, b) => {
+            return a - b
+        })
+
+        primary.sort((a, b) => {
+            return a - b
+        })
+
+        document.write(`<p>Gautas masyvas: ${array}</p>`)
+        document.write(`<p>Pirminiai skaičiai: ${primary}</p>`)
+    </script>
+</body>
+</html>

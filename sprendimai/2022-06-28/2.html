@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antra užduotis</title>
+</head>
+<body>
+    <script>
+        //Sugeneruokite 6 kintamuosius kurių reikšmės būtų atsitiktiniai skaičiai nuo 1000 iki 9999. 
+        //Atspausdinkite reikšmes viename strige, išrūšiuotas nuo didžiausios iki mažiausios, atskirtas tarpais. 
+        //Naudoti ciklų ir masyvų NEGALIMA.
+
+        const rand = (min, max) => {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min); 
+        }
+
+        let a = rand(1000, 9999)
+        let b = rand(1000, 9999)
+        let c = rand(1000, 9999)
+        let d = rand(1000, 9999)
+        let e = rand(1000, 9999)
+        let f = rand(1000, 9999)
+        let temp = 0
+        
+        if(a > f) {
+            temp = a
+            a = f
+            f = temp
+        }
+
+        if(b > f) {
+            temp = b
+            b = f
+            f = temp
+        }
+
+        if(c > f) {
+            temp = c
+            c = f
+            f = temp
+        }
+
+        if(d > f) {
+            temp = d
+            d = f
+            f = temp
+        }
+
+        if(e > f) {
+            temp = e
+            e = f
+            f = temp
+        }
+
+        if(a > e) {
+            temp = a
+            a = e
+            e = temp
+        }
+
+        if(b > e) {
+            temp = b
+            b = e
+            e = temp
+        }
+
+        if(c > e) {
+            temp = c
+            c = e
+            e = temp
+        }
+
+        if(d > e) {
+            temp = d
+            d = e
+            e = temp
+        }
+
+        if(a > d) {
+            temp = a
+            a = d
+            d = temp
+        }
+
+        if(b > d) {
+            temp = b
+            b = d
+            d = temp
+        }
+
+        if(c > d) {
+            temp = c
+            c = d
+            d = temp
+        }
+
+        if(a > c) {
+            temp = a
+            a = c
+            c = temp
+        }
+
+        if(b > c) {
+            temp = b
+            b = c
+            c = temp
+        }
+
+        if(a > b) {
+            temp = a
+            a = b
+            b = temp
+        }
+
+        document.write('Išrūšiuoti kintamieji: ', a + ', ', b + ', ', c + ', ', d + ', ', e + ', ', f)
+
+    </script>
+</body>
+</html>

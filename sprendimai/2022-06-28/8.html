@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Aprašykite klasę “Televizorius” su nurodytomis savybėmis: Gamintojas, kanalas ir garsas. Gamintojo pavadinimą priskirkite konstruktoriuje kaip gautą parametrą. Vos tik įjungus televizorių turėtų būti parinktas pirmas kanalas, o garso lygis 50. 
+        // Sukurkite metodus kurie padidintų ir sumažintų televizoriaus garsą, tačiau šis niekuomet negali būti žemiau nei 0 ir aukščiau nei 100. 
+        // Sukurkite metodą kuris keistų kanalą, tačiau atkreipkite dėmesį, kad gal televizorius jų turi tik 50, tad jei pultelyje įvesite didesnį skaičių, kanalas turi būti pakeičiamas į pirmajį.
+        // Sukurkite metodą, kuris atstatytų televizorių atgal į gamyklinius parametrus.
+        // Sukurkite metodą, kuris grąžintų atgal eilutę “Televizorius ‘Sony’ šiuo metu rodo 8 kanalą. Garso lygis 76.”
+        const rand = (min, max) => {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min); 
+        }
+        
+        class Televizorius {
+            constructor(brand) {
+                this.brand = brand
+                this.volume = 50
+                this.channel = 1
+            }
+
+            setChannel(channel) {
+                this.channel = (channel < 0 || channel > 50 ) ? 1 : channel
+
+                return this
+            }
+
+            setVolume(volume) {
+                if(volume < 0 || volume > 100 )
+                    volume = 50
+
+                this.volume = volume
+
+                return this
+            }
+
+            factoryReset() {
+                this.volume = 50
+                this.channel = 1
+
+                return 'Televizorius atstatytas į gamyklinius parametrus'
+            }
+
+            currentActivity() {
+                return `Televizorius "${this.brand}" šiuo metu rodo ${this.channel} kanalą. Garso lygis ${this.volume}.`
+            }
+        }
+
+        const watch = new Televizorius('Šilelis')
+        const randomVolume = rand(-20, 120)
+        const randomChannel = rand(-10, 80)
+
+        const resp = watch.setChannel(randomChannel)
+                          .setVolume(randomVolume)
+                          .currentActivity()
+
+        document.write(`<h2>${resp}</h2>`)
+    </script>
+</body>
+</html>

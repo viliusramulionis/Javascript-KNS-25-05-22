@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>BTC kainos pokytis:</h3>
+    <div id="btc"></div>
+    <script>
+        // Pasinaudodami nemokamu API:
+        // https://blockchain.info/tobtc?currency=EUR&value=1
+
+        // Susigrąžinkite dabartinę Bitcoin’o vertę vieno euro atžvilgiu. Aprašykite kodą kuris:
+        // Kreiptųsi nurodytu adresu kas 10 sekundžių ir fiksuotų vertės pasikeitimus. 
+        // Visas gautas vertes talpintų masyve.
+        // Naršyklėje atvaizduotų procentinę vertės kitimo išraišką programos veikimo laikotariu. (Jeigu gautas rezultatas neigiamas reikšmę nuspalvinkite raudonai, jeigu teigiamas žaliai).
+
+        // Testavimo tikslais vertės kitimą galite simuliuoti pasinaudodami atsitiktinio skaičiaus generavimu. 
+
+        priceIndex = []
+
+        setInterval(() => {
+            fetch('https://blockchain.info/tobtc?currency=EUR&value=1')
+            .then(resp => resp.json())
+            .then(price => {
+                priceIndex[priceIndex.length] = price
+                const change = (price - priceIndex[0]) / priceIndex[0] * 100
+                const pChange = change.toFixed(2)
+                const color = 'green'
+
+                if(change < 0) 
+                    color = 'red'
+
+                document.querySelector('#btc').innerHTML = `<span style="color: ${color};">${pChange} %</span>`
+            })
+
+        }, 10000)
+        
+
+    </script>
+</body>
+</html>

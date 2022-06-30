@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Parašykite funkciją, kuri priimtų du parametrus ‘exclude’ ir ‘length’. 
+        //Funcija turi sugeneruoti atsitiktinį stringą iš lotyniškų didžiūjų raidžių. 
+        //Stringo ilgis nurodomas antru perduodamu parametru. 
+        //Pirmuoju parametru palikite galimybę į funkciją perduoti simbolius kurių sugeneruotame 
+        //stringe neturėtų būti. Aprašykite funkciją taip, kad ją iššaukinėjant, 
+        //būtų privaloma nurodyti tik generuojamo stringo ilgį.
+
+        const rand = (min, max) => {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min); 
+        }
+
+        const generateString = (length, exclude = []) => {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            let string = ''
+
+            if(exclude.length === letters.length) 
+                return 'Nebėra iš ko rinktis'
+
+            while(string.length < length) {
+                let letter = letters[rand(0, letters.length - 1)] 
+
+                if(exclude.includes(letter))
+                    continue
+
+                string += letter
+            }
+
+            return string
+        }
+
+        document.write('Gautas stringas: ', generateString(10, ['A, B, C']))
+    </script>
+</body>
+</html>
