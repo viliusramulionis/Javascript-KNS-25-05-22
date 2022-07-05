@@ -1,0 +1,21 @@
+{
+  "name": "2022-07-05",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "nodemon .",
+    "date": "nodemon date.js",
+    "static": "nodemon static.js",
+    "extends": "nodemon extends.js",
+    "functions": "nodemon functions.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
+}
