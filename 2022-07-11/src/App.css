@@ -1,0 +1,10 @@
+body {
+  background: rgb(235, 240, 246);
+}
+
+.App {
+  max-width: 30rem;
+  width: 100%;
+  padding: 0 2rem;
+  margin: 0 auto;
+}
