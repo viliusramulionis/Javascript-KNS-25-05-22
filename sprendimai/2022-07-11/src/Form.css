@@ -1,0 +1,27 @@
+label {
+    display: block;
+}
+
+select,
+textarea,
+input {
+    width: 100%;
+    border: 1px solid rgb(202, 202, 202);
+    padding: .4rem .5rem;
+}
+
+button {
+    background: blue;
+    border: none;
+    color: #FFF;
+    display: inline-block;
+    padding: .5rem 2rem;
+    font-weight: 600;
+}
+
+.response {
+    background: rgb(210, 247, 210);
+    border: 1px solid rgb(155, 212, 155);
+    padding: 1rem; 
+    margin-top: 2rem;
+}
