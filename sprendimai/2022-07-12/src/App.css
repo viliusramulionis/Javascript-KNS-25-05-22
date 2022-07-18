@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+.searchResults {
+  max-width: 20rem;
+  width: 100%;
+  margin: 1rem auto 0;
+}
+
+.searchField {
+  max-width: 20rem;
+  width: 100%;
+  margin: 2rem auto 0;
+}
+
+.searchField label {
+  display: block;
+  font-weight: 600;
+  margin: 0 0 .4rem;
+}
+
+.searchField input {
+  width: 100%;
+  border: 1px solid rgb(215, 215, 215);
+  padding: .5rem 1rem;
+}
+
+.searchResults img {
+  max-width: 100%;
+}
+

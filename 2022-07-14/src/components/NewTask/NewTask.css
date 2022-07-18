@@ -1,0 +1,15 @@
+.newTask > form {
+    display: flex;
+}
+
+.newTask input[type="text"] {
+    width: 100%;
+    border: 1px solid rgb(225, 225, 225);
+    padding: .5rem 1rem;
+}
+
+.newTask .btn {
+    background: black;
+    color: white;
+    font-weight: 600;
+}

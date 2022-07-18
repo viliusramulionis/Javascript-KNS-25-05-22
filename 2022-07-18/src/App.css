@@ -1,0 +1,18 @@
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+h4 {
+  font-size: 0.9rem;
+}
+img {
+  max-height: 400px;
+}
+
+.pagination {
+  text-align: center;
+  margin: 1rem 0;
+}
