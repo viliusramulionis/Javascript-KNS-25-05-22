@@ -23,7 +23,7 @@ try {
     const data = await fs.readFile('./hello.txt', 'utf8')
     console.log('Faile esanti informacija: ', data)
 
-    await fs.writeFile('./hello.txt', data + 'Hello World!', 'utf8')
+    await fs.writeFile('./hello.txt', data + 'Hello World!\n', 'utf8')
     console.log('Failas sėkmingai issaugotas')
 } catch(err) {
     console.log('Ivyko klaida')
