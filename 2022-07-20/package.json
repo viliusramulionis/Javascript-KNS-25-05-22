@@ -1,0 +1,24 @@
+{
+  "name": "2022-07-20",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "nodemon .",
+    "append": "nodemon append.js",
+    "json": "nodemon json.js --ignore people.json",
+    "server": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@faker-js/faker": "^7.3.0",
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
