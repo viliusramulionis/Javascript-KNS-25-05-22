@@ -72,6 +72,49 @@ rl.question('Įveskite vardą: ', (vardas) => {
     })
 })
 
-//const questions = ['Įveskite vardą:', 'Įveskite pavardę:', 'Įveskite slaptažodį:', 'Įveskite el. pašto adresą:', 'Įveskite gimimo dieną:']
+//UNIVERSALESNIS SPRENDIMAS PASITELKIANT FUNKCINĮ PROGRAMAVIMĄ
+//NORS EILUČIŲ KIEKIS, ŠIUO ATVEJU, GAUNASI DIDESNIS, TAČIAU
+//DIDINANT KLAUSIMŲ KIEKĮ PAMATYSIME AIŠKŲ PRANAŠUMĄ
 
+// const questions = [
+//     { vardas: 'Įveskite vardą:' }, 
+//     { pavarde: 'Įveskite pavardę:' }, 
+//     { slaptazodis: 'Įveskite slaptažodį:' }, 
+//     { elpastas: 'Įveskite el. pašto adresą:' }, 
+//     { gimtadienis: 'Įveskite gimimo dieną:' }
+// ]
 
+// const result = {}
+
+// const handleFile = async () => {
+//     try {
+//         let data = await fs.readFile(file, 'utf8')
+//         data = JSON.parse(data)
+//         data.push(result)
+//         data = JSON.stringify(data, null, 4)
+//         await fs.writeFile(file, data)
+//     } catch {
+//         await fs.writeFile(file, JSON.stringify([result], null, 4))
+//     }
+
+//     console.log(chalk.green('Duomenys sėkmingai issaugoti'))
+// }
+
+// const askQuestion = (pos = 0) => {
+//     rl.question(Object.values(questions[pos])[0] + ' ', async (answer) => {
+//         if(!handleValidation(answer, pos != 3 ? null : 'email'))
+//             return
+
+//         result[Object.keys(questions[pos])[0]] = answer
+
+//         if(pos < questions.length - 1) {
+//             askQuestion(pos + 1)
+//             return 
+//         }
+
+//         handleFile()
+//         rl.close()
+//     })
+// }
+
+// askQuestion()
