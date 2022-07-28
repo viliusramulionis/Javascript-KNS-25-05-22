@@ -31,45 +31,80 @@ const handleValidation = (value, type = 'text') => {
     return true
 }
 
-rl.question('Įveskite vardą: ', (vardas) => {
-    if(!handleValidation(vardas))
-        return false
+rl.question('Kokią operaciją norėtumėte atlikti? 1 - Pridėti žmogų 2 - Pašalinti žmogų iš sąrašo', (resp) => {
+    if(resp === '1') {
 
-    rl.question('Įveskite pavardę: ', (pavarde) => {
-        if(!handleValidation(pavarde))
-            return false
-
-        rl.question('Įveskite slaptažodį: ', (slaptazodis) => {
-            if(!handleValidation(slaptazodis))
+        rl.question('Įveskite vardą: ', (vardas) => {
+            if(!handleValidation(vardas))
                 return false
 
-            rl.question('Įveskite el. pašto adredsą: ', (elpastas) => {
-                if(!handleValidation(elpastas, 'email'))
+            rl.question('Įveskite pavardę: ', (pavarde) => {
+                if(!handleValidation(pavarde))
                     return false
 
-                rl.question('Įveskite gimimo dieną: ', async (gimtadienis) => {
-                    if(!handleValidation(gimtadienis))
+                rl.question('Įveskite slaptažodį: ', (slaptazodis) => {
+                    if(!handleValidation(slaptazodis))
                         return false
 
-                    const result = {vardas, pavarde, slaptazodis, elpastas, gimtadienis}
+                    rl.question('Įveskite el. pašto adredsą: ', (elpastas) => {
+                        if(!handleValidation(elpastas, 'email'))
+                            return false
 
-                    try {
-                        let data = await fs.readFile(file, 'utf8')
-                        data = JSON.parse(data)
-                        data.push(result)
-                        data = JSON.stringify(data, null, 4)
-                        await fs.writeFile(file, data)
-                    } catch {
-                        await fs.writeFile(file, JSON.stringify([result], null, 4))
-                    }
+                        rl.question('Įveskite gimimo dieną: ', async (gimtadienis) => {
+                            if(!handleValidation(gimtadienis))
+                                return false
 
-                    console.log(chalk.green('Duomenys sėkmingai issaugoti'))
+                            const result = {vardas, pavarde, slaptazodis, elpastas, gimtadienis}
 
-                    rl.close()
+                            try {
+                                let data = await fs.readFile(file, 'utf8')
+                                data = JSON.parse(data)
+                                data.push(result)
+                                data = JSON.stringify(data, null, 4)
+                                await fs.writeFile(file, data)
+                            } catch {
+                                await fs.writeFile(file, JSON.stringify([result], null, 4))
+                            }
+
+                            console.log(chalk.green('Duomenys sėkmingai issaugoti'))
+
+                            rl.close()
+                        })
+                    })
                 })
             })
         })
-    })
+
+        return 
+    }
+
+    if(resp === '2') {
+        rl.question('Įveskite el. pašto adresą: ', async (email) => {
+            if(!handleValidation(email, 'email')) {
+                console.log(chalk.red('Blogas el. pašto adresas'))
+                rl.close()
+                return 
+            }
+
+            try {
+                let data = await fs.readFile(file, 'utf8')
+                data = JSON.parse(data)
+                data = data.filter(person => person.elpastas != email)
+                data = JSON.stringify(data, null, 4)
+                await fs.writeFile(file, data)
+            } catch {
+                console.log('Nėra įrašytų jokių duomenų')
+            }
+    
+            rl.close()
+        })
+
+        return
+    }
+
+    console.log('Įvesta bloga operacija')
+
+    rl.close()
 })
 
 //UNIVERSALESNIS SPRENDIMAS PASITELKIANT FUNKCINĮ PROGRAMAVIMĄ

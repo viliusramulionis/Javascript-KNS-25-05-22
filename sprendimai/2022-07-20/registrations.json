@@ -21,13 +21,6 @@
         "gimtadienis": "awdawdawd"
     },
     {
-        "vardas": "Testuojame",
-        "pavarde": "Pavarde",
-        "slaptazodis": "Slaptazodi irgi testuojame",
-        "elpastas": "adresas@pratestuotas.lt",
-        "gimtadienis": "2012-01-01"
-    },
-    {
         "vardas": "awdawd",
         "pavarde": "awdawd",
         "slaptazodis": "awdawdawd",
@@ -39,6 +32,13 @@
         "pavarde": "awdawdaw",
         "slaptazodis": "awdawdawd",
         "elpastas": "awdawdawd@gmail.com",
+        "gimtadienis": "awdawdawd"
+    },
+    {
+        "vardas": "awdawdawd",
+        "pavarde": "awdawdawd",
+        "slaptazodis": "awdawdawda",
+        "elpastas": "awdadawd@gmail.com",
         "gimtadienis": "awdawdawd"
     }
 ]

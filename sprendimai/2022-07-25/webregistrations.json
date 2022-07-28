@@ -1,0 +1,37 @@
+[
+    {
+        "vardas": "Vilius",
+        "pavarde": "Ramulionis",
+        "slaptazodis": "1234",
+        "elpastas": "vilius.ramulionis@bit.lt",
+        "gimtadienis": "1955-12-01"
+    },
+    {
+        "vardas": "Vilius",
+        "pavarde": "Ramulionis",
+        "slaptazodis": "1234",
+        "elpastas": "vilius.ramulionis@bit.lt",
+        "gimtadienis": ""
+    },
+    {
+        "vardas": "Vilius",
+        "pavarde": "Ramulionis",
+        "slaptazodis": "1234",
+        "elpastas": "vilius.ramulionis@bit.lt",
+        "gimtadienis": "1955-12-01"
+    },
+    {},
+    {
+        "vardas": "Vilius"
+    },
+    {
+        "vardas": ""
+    },
+    {
+        "vardas": "Vilius",
+        "pavarde": "Ramulionis",
+        "slaptazodis": "1234",
+        "elpastas": "vilius.ramulionis@bit.lt",
+        "gimtadienis": "1955-12-01"
+    }
+]

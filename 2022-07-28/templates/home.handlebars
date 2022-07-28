@@ -1,0 +1,36 @@
+<h1>Titulinis puslapis</h1>
+{{#if vardas}}
+    <p>Sveiki, {{vardas}}</p>
+{{else}}
+    <p>Neįvestas vardas</p>
+{{/if}}
+
+<h3>Masyvo atvaizdavimas be ciklo:</h3>
+
+{{masyvas}}
+
+<h3>Masyvo atvaizdavimas su ciklu:</h3>
+<ul>
+    {{#each masyvas}}
+        <li>{{@index}}: {{this}}</li>
+    {{/each}}
+</ul>
+
+<h3>Kreipimąsis į objektą:</h3>
+<ul>
+    <li>{{objektas.miestas}}</li>
+    <li>{{objektas.adresas}}</li>
+    <li>{{objektas.telefonas}}</li>
+</ul>
+
+<h3>Objekto paleidimas per ciklą:</h3>
+<ul>
+    {{#each objektas}}
+        <li>{{this}}</li>
+    {{/each}}
+</ul>
+
+<h3>HTML atvaizdavimas</h3>
+{{{html}}}
+
+<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae, facere quasi inventore, velit sapiente cum laboriosam distinctio voluptatibus necessitatibus dignissimos laudantium tempore eligendi minima optio quibusdam, repellendus iste! Inventore atque id odit magnam eveniet officiis quasi pariatur repellendus laudantium magni. Numquam est hic, nulla officia ab obcaecati fuga neque voluptate et maiores eveniet doloremque nemo officiis adipisci iure incidunt beatae consequuntur in, at laborum aperiam corporis deleniti perferendis delectus. Assumenda consectetur, quam, quas rerum architecto quibusdam vitae quidem deleniti earum pariatur unde magnam ea quasi saepe debitis ipsam. Corrupti magnam adipisci, neque accusamus iure ducimus iusto enim laborum nam voluptatum.</p>
