@@ -15,7 +15,7 @@ app.use('/public', express.static('resources'))
 
 //Titulinis puslapis
 app.get('/', (req, res) => {
-    const vardas = req.query.vardas
+    //const vardas = req.query.vardas
     const masyvas = ['Gabrielė', 'Dainius', 'Adomas', 'Elena', 'Rytis']
     const objektas = {
         miestas: 'Kaunas',
