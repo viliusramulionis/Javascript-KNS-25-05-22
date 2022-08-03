@@ -1,6 +1,8 @@
 import express from 'express'
+import session from 'express-session'
 import { engine } from 'express-handlebars'
 import fs from 'fs/promises'
+import auth from './middleware/auth.js'
 
 const app = express()
 const file = './database.json'
@@ -9,6 +11,17 @@ app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 app.set('views', './views')
 
+//Konfigūracijos eilutė sesijos priskyrimui prie aplikacijos
+app.use(session({
+    secret: 'labai slapta fraze',
+    resave: true,
+    saveUninitialized: false,
+    cookie: { 
+        maxAge: 6000000
+    }
+}))
+
+//Nurodoma statiniu failu perdavimo kelias ir direktorija i kuria kreipiamasi
 app.use('/public', express.static('public'))
 //Norint priimti duomenis POST ir PUT metodais reikalinga ši eilutė
 app.use(express.urlencoded({
@@ -35,39 +48,44 @@ app.post('/', async (req, res) => {
         if(!JSON.parse(data).find(user => user.email === req.body.email && user.password === req.body.password)) 
             return res.render('login', { message: 'Neteisingi prisijungimo duomenys', status: 'danger' })
             
-        
+        req.session.loggedIn = true
         return res.redirect('/admin')
     } catch {
         return res.render('login', { message: 'Duomenu bazės failas nerastas', status: 'danger' })
     }
 })
 
+//Formos atvaizdavimas
 app.get('/register', async (req, res) => {
+    res.render('register')
+})
+
+//Duomenu priemimas is formos
+app.post('/register', async (req, res) => {
     if(
-        JSON.stringify(req.query) != '{}' &&
-        req.query.name !== '' &&
-        req.query.email !== '' &&
-        req.query.password !== ''
+        JSON.stringify(req.body) != '{}' &&
+        req.body.name !== '' &&
+        req.body.email !== '' &&
+        req.body.password !== ''
     ) {
         try {
             let data = await fs.readFile(file, 'utf8')
             data = JSON.parse(data)
-            if(data.find(user => user.email === req.query.email))
+            if(data.find(user => user.email === req.body.email))
                 return res.render('register', { message: 'Toks vartotojas jau yra registruotas', status: 'danger' })
 
-            data.push(req.query)
+            data.push(req.body)
             await fs.writeFile( file, JSON.stringify(data, null, 4))
         } catch {
-            await fs.writeFile( file, JSON.stringify([req.query], null, 4) )
+            await fs.writeFile( file, JSON.stringify([req.body], null, 4) )
         }
         
         //return res.render('register', {message: 'Vartotojas sėkmingai užregistruotas <a href="/">prisijunkite</a>', status: 'success'})
         return res.redirect('/?status=1')
     }
-    res.render('register')
 })
 
-app.get('/admin', async (req, res) => {
+app.get('/admin', auth, async (req, res) => {
     const data = await fs.readFile(file, 'utf8')
     const users = JSON.parse(data)
     const options = { users }
@@ -83,7 +101,7 @@ app.get('/admin', async (req, res) => {
     res.render('admin', options)
 })
 
-app.get('/delete/:id', async (req, res) => {
+app.get('/delete/:id', auth,  async (req, res) => {
     try {
         const data = await fs.readFile(file, 'utf8')
         let users = JSON.parse(data)
@@ -92,6 +110,17 @@ app.get('/delete/:id', async (req, res) => {
         res.redirect('/admin?success=1')
     } catch {
         res.redirect('/admin?success=0')
+    }
+})
+
+app.get('/edit/:id', auth, async (req, res) => {
+    const id = req.params.id
+    try {
+        const data = await fs.readFile(file, 'utf8')
+        const user = JSON.parse(data).find((value, index) => index == id)
+        res.render('edit', user)
+    } catch {
+        res.render('edit', { message: 'Nepavyko perskaityti failo', status: 'danger'})
     }
 })
 
