@@ -1,0 +1,30 @@
+<a href="/register">Naujo studento registracija</a>
+<table>
+    <thead>
+        <tr>
+            <th>Vardas</th>
+            <th>Pavardė</th>
+            <th>Adresas</th>
+            <th>Telefono nr.</th>
+            <th>El. pašto adresas</th>
+            <th>Asmens kodas</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each students}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{surname}}</td>
+                <td>{{address}}</td>
+                <td>{{phone}}</td>
+                <td>{{email}}</td>
+                <td>{{personalId}}</td>
+                <td>
+                    <a href="/delete/{{_id}}">Ištrinti</a>
+                    <a href="/edit/{{_id}}">Redaguoti</a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
