@@ -4,9 +4,11 @@ import path from 'path'
 
 //Konfigūracija nuotraukų priėmimui
 const storage = multer.diskStorage({
+    //Kuriame kataloge bus saugomos nuotraukos
     destination: function (req, file, cb) {
       cb(null, './nuotraukos')
     },
+    //Konfigūruojama nuotraukos pavadinimas
     filename: function (req, file, cb) {
         const ext = file.originalname.split('.')
 
@@ -17,6 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
     storage: storage,
+    //Konfigūruojama kokia nuotrauka bus priimta
     fileFilter: function (req, file, next) {
         if( file.mimetype === 'image/jpeg' || 
             file.mimetype === 'image/png' || 
