@@ -10,10 +10,10 @@ import express from "express";
 import { engine } from "express-handlebars";
 import session from "express-session";
 import database from './database/connect.js';
-import playlist from './routing (MVC structure)/controller/playlist.js';
-import register from './routing (MVC structure)/controller/register.js.js';
-import login from './routing (MVC structure)/controller/login.js';
-import songs from './routing (MVC structure)/controller/songs.js';
+import playlist from './controller/playlist.js';
+import register from './controller/register.js';
+import login from './controller/login.js';
+import songs from './controller/songs.js';
 
 const port = process.env.PORT || 3000;
 

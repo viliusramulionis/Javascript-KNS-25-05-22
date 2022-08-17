@@ -6,3 +6,5 @@ export default await mysql.createConnection({
     password: "kulokas",
     database: "Lukas",
 });
+
+console.log('prisijunge')
