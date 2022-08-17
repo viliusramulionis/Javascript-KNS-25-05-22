@@ -1,7 +1,6 @@
 import express from 'express'
 import { engine } from 'express-handlebars'
 import mysql from 'mysql2/promise'
-import Connection from 'mysql2/typings/mysql/lib/Connection';
 
 const app = express()
 app.engine('handlebars', engine());

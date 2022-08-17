@@ -42,7 +42,10 @@ app.use('/nuotraukos', express.static('nuotraukos'))
 
 //Middleware - nuotraukų priėmimo funkcija
 app.post('/', upload.single('nuotrauka'), (req, res) => {
+    if(req.file)
     res.send(req.file.filename)
+    else 
+    res.send('yra')
 })
 
 app.get('/', (req, res) => {
