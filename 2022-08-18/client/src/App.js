@@ -5,11 +5,9 @@ const App = () => {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3000')
+    fetch('/api/posts')
     .then(resp => resp.json())
-    .then(resp => {
-      setPosts(resp)
-    })
+    .then(resp => setPosts(resp))
   }, [])
 
   return (
