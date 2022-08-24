@@ -1,0 +1,31 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css');
+
+.articles {
+  column-count: 3;
+}
+
+.box {
+  margin-bottom: 3rem;  
+  break-inside: avoid-column;
+}
+
+.box img {
+  width: 100%;
+}
+
+.box .image {
+  margin-bottom: 1rem;
+}
+
+.box .controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box .article-link {
+  text-decoration: none;
+  color: black;
+  margin-bottom: 1rem;
+  display: block;
+}
