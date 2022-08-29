@@ -28,7 +28,7 @@ const App = () => {
     if(isNaN(id))
       return
     
-    fetch('http://localhost:3000/delete/' + id, {
+    fetch('/api/posts/delete/' + id, {
       method: 'DELETE'
     })
     .then(resp => resp.json())
@@ -77,9 +77,13 @@ const App = () => {
                 </Link>
               </div>
               <div className="controls">
-                <Link to={'/post/' + article.id} className="btn btn-success">Skaityti plačiau</Link>
-                <Link to={'/edit/' + article.id} className="btn btn-primary">Redaguoti</Link>
-                <button onClick={() => handleDelete(article.id)} className="btn btn-danger">Trinti</button>
+                <div className="date">
+                  <em>{new Date(article.createdAt).toLocaleDateString('lt-LT')}</em>
+                </div>
+                <div className="buttons">
+                  <Link to={'/edit/' + article.id} className="btn btn-light">Redaguoti</Link>
+                  <button onClick={() => handleDelete(article.id)} className="btn btn-light">Trinti</button>
+                </div>
               </div>
             </div>
           )

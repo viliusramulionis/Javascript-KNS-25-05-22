@@ -29,4 +29,27 @@ router.post('/register', async (req, res) => {
     }
 })
 
+router.post('/login', async (req, res) => {
+    try {
+        const user = await db.Users.findOne({ 
+            where: { 
+                email: req.body.email 
+            } 
+        })
+        
+        if(!user) 
+            return res.status(401).send('Toks vartotojas nerastas')
+
+        if(await bcrypt.compare(req.body.password, user.password)) {
+            req.session.loggedin = true
+            res.send('Prisijungimas sėkmingas')
+        } else {
+            res.status(401).send('Nepavyko prisijungti')
+        }
+    } catch(error) {
+        console.log(error)
+        res.status(418).send('Įvyko serverio klaida')
+    }
+})
+
 export default router
