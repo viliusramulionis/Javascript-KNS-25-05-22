@@ -52,4 +52,9 @@ router.post('/login', async (req, res) => {
     }
 })
 
+router.get('/logout', (req, res) => {
+    req.session.destroy()
+    res.send('Jūs sėkmingai atsijungėte, lauksime sugrįžtant :)')
+})
+
 export default router

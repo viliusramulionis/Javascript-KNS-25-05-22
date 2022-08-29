@@ -20,14 +20,7 @@ const NewPost = () => {
         // for(const key in postForm) {
         //     form.append(key, postForm[key])
         // }
-        fetch('/api/posts/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postForm)
-        })
-        .then(resp => resp.json())
+        axios.post('/api/posts/', postForm)
         .then(resp => console.log(resp))
 
     }
