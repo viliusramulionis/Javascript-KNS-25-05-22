@@ -1,6 +1,6 @@
 import Joi from 'joi'
 
-const validate = (schema, req, next) => {
+const validate = (schema, req, res, next) => {
     const options = {
         abortEarly: true,
         stripUnknown: true
@@ -8,7 +8,7 @@ const validate = (schema, req, next) => {
     const {error, value} = schema.validate(req.body, options)
 
     if(error)
-        return next('Neteisingai užpildyti laukeliai')
+        return res.status(500).send('Neteisingai užpildyti laukeliai')
 
     req.body = value
     next()
@@ -21,7 +21,7 @@ export const postValidator = (req, res, next) => {
         image: Joi.string()
     })
 
-    validate(schema, req, next)
+    validate(schema, req, res, next)
 }
 
 export default validate

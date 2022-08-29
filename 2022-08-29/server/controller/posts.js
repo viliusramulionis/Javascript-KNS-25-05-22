@@ -35,7 +35,7 @@ router.post('/', auth, postValidator, async (req, res) => {
     console.log(req.body)
     try {
         new db.Posts(req.body).save()
-        res.json({ message: 'Įrašas sėkmingai sukurtas' })
+        res.send('Įrašas sėkmingai sukurtas')
     } catch {
         res.status(500).send('Įvyko serverio klaida')
     }
@@ -45,7 +45,7 @@ router.put('/edit/:id', auth, async (req, res) => {
     try {
         const post = await db.Posts.findByPk(req.params.id)
         post.update(req.body)
-        res.json({ message: 'Įrašas sėkmingai atnaujintas'})
+        res.send('Įrašas sėkmingai atnaujintas')
     } catch {
         res.status(500).send('Įvyko serverio klaida')
     }

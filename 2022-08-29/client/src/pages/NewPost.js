@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const NewPost = () => {
@@ -7,6 +8,12 @@ const NewPost = () => {
         content: '',
         image: ''
     })
+    const [alert, setAlert] = useState({
+        message: '',
+        status: ''
+    })
+
+    const navigate = useNavigate()
 
     const handleForm = (e) => {
         setPostForm({...postForm, [e.target.name]: e.target.value})
@@ -21,13 +28,33 @@ const NewPost = () => {
         //     form.append(key, postForm[key])
         // }
         axios.post('/api/posts/', postForm)
-        .then(resp => console.log(resp))
+        .then(resp => {
+            setAlert({
+                message: resp.data,
+                status: 'success'
+            })
+
+            window.scrollTo(0, 0)
+
+            setTimeout(() => navigate('/'), 2000)
+        })
+        .catch(error => {
+            setAlert({
+                message: error.response.data,
+                status: 'danger'
+            })
+        })
 
     }
 
     return (
         <div className="container">
             <h1>Naujas straipnis</h1>
+            {alert.message && (
+                <div className={'alert alert-' + alert.status}>
+                {alert.message}
+                </div>
+            )}
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="form-group mb-2">
                     <label className="mb-1">Pavadinimas:</label>

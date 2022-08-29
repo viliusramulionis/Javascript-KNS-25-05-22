@@ -30,6 +30,8 @@ const Register = () => {
                 status: 'success'
             })
 
+            window.scrollTo(0, 0)
+
             setTimeout(() => navigate('/'), 1000)
         })
         .catch(error => {

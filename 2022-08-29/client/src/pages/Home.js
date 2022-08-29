@@ -28,16 +28,14 @@ const Home = (props) => {
       if(isNaN(id) || !loggedIn)
         return
       
-      fetch('/api/posts/delete/' + id, {
-        method: 'DELETE'
-      })
-      .then(resp => resp.json())
+      axios.delete('/api/posts/delete/' + id)
       .then(resp => {
         setAlert({
           message: resp.message,
           status: 'success'
         })
         setRefresh(!refresh)
+        
         window.scrollTo(0, 0)
       })
       .catch(error => {
