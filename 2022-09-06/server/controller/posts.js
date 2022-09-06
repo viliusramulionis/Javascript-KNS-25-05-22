@@ -32,7 +32,9 @@ router.get('/', async (req, res) => {
 //Vienas blogo įrašas
 router.get('/:id', async (req, res) => {
     try {
-        const post = await db.Posts.findByPk(req.params.id)
+        const post = await db.Posts.findByPk(req.params.id, {
+            include: [db.Users, db.Comments]
+        })
         res.json(post)
     } catch {
         res.status(500).send('Įvyko serverio klaida')

@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize'
 import mysql from 'mysql2/promise'
 import Posts from '../model/posts.js'
 import Users from '../model/users.js'
+import Comments from '../model/comments.js'
 
 const database = {} 
 const credentials = {
@@ -24,14 +25,16 @@ try {
 
     database.Posts = Posts(sequelize)
     database.Users = Users(sequelize)
+    database.Comments = Comments(sequelize)
 
     database.Users.hasMany(database.Posts, {
         onDelete: 'RESTRICT',
         onUpdate: 'RESTRICT'
     })
     database.Posts.belongsTo(database.Users)
+    database.Posts.hasMany(database.Comments)
 
-    await sequelize.sync({ alter: true })
+    await sequelize.sync({ alter: false })
 } catch(error) {
     console.log(error)
     console.log('Nepavyko prisijungti prie duomenų bazės');
