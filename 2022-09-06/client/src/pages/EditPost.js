@@ -32,7 +32,7 @@ const EditPost = () => {
             console.log(error)
             navigate('/')
         })
-    }, [])
+    }, [id, navigate])
 
     const handleForm = (e) => {
         setPost({...post, [e.target.name]: e.target.value})

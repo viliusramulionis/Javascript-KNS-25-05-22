@@ -30,7 +30,7 @@ const Logout = () => {
             })
             setTimeout(() => navigate('/'), 2000)
         })
-    }, [navigate])
+    }, [navigate, setLoggedIn, setUserInfo])
 
     return alert.message && (
         <div className="container">

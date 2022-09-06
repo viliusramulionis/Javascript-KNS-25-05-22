@@ -33,8 +33,9 @@ try {
     })
     database.Posts.belongsTo(database.Users)
     database.Posts.hasMany(database.Comments)
+    database.Comments.belongsTo(database.Users)
 
-    await sequelize.sync({ alter: false })
+    await sequelize.sync({ alter: true })
 } catch(error) {
     console.log(error)
     console.log('Nepavyko prisijungti prie duomenų bazės');

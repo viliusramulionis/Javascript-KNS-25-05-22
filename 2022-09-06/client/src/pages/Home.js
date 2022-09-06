@@ -1,10 +1,8 @@
-import { useState, useEffect, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-import MainContext from '../MainContext'
 
 const Home = () => {
-    const { loggedIn } = useContext(MainContext)
     const [posts, setPosts] = useState([])
     const [alert, setAlert] = useState({
       message: '',
@@ -12,7 +10,6 @@ const Home = () => {
     })
     const [keyword, setKeyword] = useState('')
     const [refresh, setRefresh] = useState(false)
-    const navigate = useNavigate()
   
     useEffect(() => {
       axios.get('/api/posts/')
@@ -93,12 +90,6 @@ const Home = () => {
                     <div className="date">
                         <em>{new Date(article.createdAt).toLocaleDateString('lt-LT')}</em>
                     </div>
-                    {/* {loggedIn && 
-                        <div className="buttons">
-                            <Link to={'/edit/' + article.id} className="btn btn-light">Redaguoti</Link>
-                            <button onClick={() => handleDelete(article.id)} className="btn btn-light">Trinti</button>
-                        </div>
-                    } */}
                 </div>
               </div>
             )

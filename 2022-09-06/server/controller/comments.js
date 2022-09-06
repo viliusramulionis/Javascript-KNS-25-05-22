@@ -7,6 +7,8 @@ const Router = express.Router()
 
 Router.post('/', auth, commentsValidator, async (req, res) => {
     try {
+        //Priskiriam aktyvaus vartotojo Id
+        req.body.userId = req.session.user.id
         await db.Comments.create(req.body)
         res.send('Komentaras sėkmingai išsaugotas')
     } catch (error) {

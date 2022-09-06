@@ -10,8 +10,8 @@ const router = express.Router()
 router.get('/', async (req, res) => {
     const options = {}
 
-    if(req.query.order)
-        options.order = [ 
+    if (req.query.order)
+        options.order = [
             ['title', 'DESC']
         ]
 
@@ -33,7 +33,21 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const post = await db.Posts.findByPk(req.params.id, {
-            include: [db.Users, db.Comments]
+            include: [
+                {   model: db.Users,
+                    attributes: { exclude: ['password', 'role', 'email', 'updatedAt'] }
+                }, 
+                { 
+                    model: db.Comments, 
+                    include: { 
+                        model: db.Users,
+                        attributes: { exclude: ['password', 'role', 'email', 'updatedAt'] }
+                    }
+                }
+            ],
+            attributes: { 
+                exclude: ['postId', 'userId'] 
+            }
         })
         res.json(post)
     } catch {
@@ -73,9 +87,9 @@ router.get('/search/:keyword', async (req, res) => {
 
 router.post('/', adminAuth, upload.single('image'), postValidator, async (req, res) => {
     try {
-        if(req.file)
+        if (req.file)
             req.body.image = '/uploads/' + req.file.filename
-            
+
         new db.Posts(req.body).save()
         res.send('Įrašas sėkmingai sukurtas')
     } catch {
