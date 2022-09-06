@@ -6,6 +6,18 @@ import { auth } from '../middleware/auth.js'
 
 const router = express.Router()
 
+router.get('/all-posts/:userid', async (req, res) => {
+    try {
+        const user = await db.Users.findByPk(req.params.userid, {
+            include: db.Posts
+        })
+
+        res.json(user)
+    } catch {
+        res.send('Ivyko serverio klaida')
+    }
+})
+
 router.post('/register', registerValidator, async (req, res) => {
     try {
         const userExists = await db.Users.findOne({ 
@@ -48,7 +60,8 @@ router.post('/login', loginValidator, async (req, res) => {
                 id: user.id,
                 first_name: user.first_name,
                 last_name: user.last_name,
-                email: user.email
+                email: user.email,
+                role: user.role
             }
             res.json({message: 'Prisijungimas sėkmingas', user: req.session.user})
         } else {

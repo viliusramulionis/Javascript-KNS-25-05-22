@@ -34,6 +34,9 @@ const Login = () => {
             })
 
             setTimeout(() => {
+                if(resp.data.user.role === 1)
+                    return navigate('/admin')
+
                 navigate('/')
             }, 1000)
         })

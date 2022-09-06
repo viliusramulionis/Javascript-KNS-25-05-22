@@ -13,23 +13,34 @@ const Header = () => {
                     <h2 className="fs-4">LĮM BLOGAS</h2>
                 </Link>
 
-                <div class="d-flex align-items-center">
-                    {loggedIn && 
-                        <em style={{ fontSize: '.8rem', marginRight: '1rem' }}>Sveiki, {userInfo.first_name + ' ' + userInfo.last_name}</em>
+                <div className="d-flex align-items-center">
+                    {loggedIn &&
+                        <em style={{ fontSize: '.8rem', marginRight: '1rem' }}>
+                            Sveiki, {userInfo.first_name + ' ' + userInfo.last_name}
+                        </em>
                     }
                     <ul className="nav nav-pills">
                         <li className="nav-item">
                             <Link to="/" className="nav-link" aria-current="page">Titulinis</Link>
                         </li>
-                        {loggedIn ? (
+                        {loggedIn && userInfo.role === 1 &&
                             <>
                                 <li className="nav-item">
-                                    <Link to="/new-post" className="nav-link" aria-current="page">Naujas Straipsnis</Link>
+                                    <Link to="/admin"
+                                        className="nav-link"
+                                        aria-current="page">Administratorius</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/logout" className="nav-link" aria-current="page">Atsijungti</Link>
+                                    <Link to="/admin/new-post"
+                                        className="nav-link"
+                                        aria-current="page">Naujas Straipsnis</Link>
                                 </li>
                             </>
+                        }
+                        {loggedIn ? (
+                            <li className="nav-item">
+                                <Link to="/logout" className="nav-link" aria-current="page">Atsijungti</Link>
+                            </li>
                         ) : (
                             <>
                                 <li className="nav-item">
@@ -44,7 +55,7 @@ const Header = () => {
                 </div>
             </header>
         </div>
-    
+
     )
 }
 

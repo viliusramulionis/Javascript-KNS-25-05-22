@@ -13,7 +13,7 @@ const Header = () => {
                     <h2 className="fs-4">LĮM BLOGAS</h2>
                 </Link>
 
-                <div class="d-flex align-items-center">
+                <div className="d-flex align-items-center">
                     {loggedIn && 
                         <em style={{ fontSize: '.8rem', marginRight: '1rem' }}>Sveiki, {userInfo.first_name + ' ' + userInfo.last_name}</em>
                     }
