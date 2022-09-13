@@ -6,9 +6,9 @@ import Comments from '../model/comments.js'
 
 const database = {} 
 const credentials = {
-    host: 'localhost',
-    user: 'root',
-    password: '',
+    host: 'pauliuspetrunin.lt',
+    user: 'bit',
+    password: 'w0JipRCKkzdpzpgQ',
     database: 'blog'
 }
 
