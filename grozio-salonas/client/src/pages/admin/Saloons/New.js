@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import Alert from '../../../components/Alert/Alert'
 import MainContext from '../../../context/MainContext'
 
 const NewSaloon = () => {
@@ -28,15 +27,7 @@ const NewSaloon = () => {
                     status: 'success'
                 })
 
-                window.scrollTo(0, 0)
-
-                setTimeout(() => {
-                    setAlert({
-                        message: ''
-                    })
-
-                    navigate('/admin')
-                }, 2000)
+                navigate('/admin')
             })
             .catch(error => {
                 console.log(error)
@@ -57,7 +48,6 @@ const NewSaloon = () => {
                 <div className="page-heading">
                     <h1>Naujas grožio salonas</h1>
                 </div>
-                <Alert />
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="form-group mb-2">
                         <label className="mb-1">Pavadinimas:</label>

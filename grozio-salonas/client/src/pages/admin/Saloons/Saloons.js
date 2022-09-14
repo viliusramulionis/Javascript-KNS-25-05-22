@@ -3,12 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import MainContext from '../../../context/MainContext'
-import Alert from '../../../components/Alert/Alert'
 
 const Saloons = () => {
     const [saloons, setSaloons] = useState([])
     const navigate = useNavigate()
-    const { setAlert } = useContext(MainContext)
+    const { alert, setAlert } = useContext(MainContext)
 
     const handleDelete = (id) => {
         axios.delete('/api/saloons/delete/' + id)
@@ -17,14 +16,6 @@ const Saloons = () => {
                 message: resp.data,
                 status: 'success'
             })
-
-            window.scrollTo(0, 0)
-
-            setTimeout(() => {
-                setAlert({
-                    message: ''
-                })
-            }, 2000)
         })
         .catch(error => {
             console.log(error)
@@ -43,14 +34,13 @@ const Saloons = () => {
         axios.get('/api/saloons/')
             .then(resp => setSaloons(resp.data))
             .catch(error => console.log(error))
-    }, [])
+    }, [alert])
 
     return (
         <>
             <div className="page-heading">
                 <h1>Grožio salonai</h1>
             </div>
-            <Alert />
             {saloons ?
                 <table className="table table-striped table-hover">
                     <thead>

@@ -40,6 +40,30 @@ const Header = () => {
                             Naujas grožio salonas
                         </Link>
                     </li>
+                    <li>
+                        <Link 
+                            to="/admin/services/" 
+                            className="nav-link px-2"
+                            >
+                                Paslaugos
+                            </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/admin/services/new" 
+                            className="nav-link px-2"
+                            >
+                                Nauja paslauga
+                            </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/admin/workers" 
+                            className="nav-link px-2"
+                            >
+                                Darbuotojai
+                            </Link>
+                    </li>
                 </ul>
 
                 <div className="text-end">

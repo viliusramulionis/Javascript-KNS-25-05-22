@@ -6,7 +6,12 @@ const Router = express.Router()
 
 Router.get('/', async (req, res) => {
     try {
-        const services = await db.Services.findAll()
+        const services = await db.Services.findAll({
+            include: { 
+                model: db.Saloons, 
+                attributes: ['name']
+            }
+        })
         res.json(services)
     } catch(error) {
         console.log(error)

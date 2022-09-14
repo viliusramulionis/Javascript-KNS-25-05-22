@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import Alert from '../../../components/Alert/Alert'
 import MainContext from '../../../context/MainContext'
 
 const EditSaloon = () => {
@@ -29,15 +28,7 @@ const EditSaloon = () => {
                     status: 'success'
                 })
 
-                window.scrollTo(0, 0)
-
-                setTimeout(() => {
-                    setAlert({
-                        message: ''
-                    })
-
-                    navigate('/admin')
-                }, 2000)
+                navigate('/admin')
             })
             .catch(error => {
                 console.log(error)
@@ -60,10 +51,8 @@ const EditSaloon = () => {
                     message: error.response.data,
                     status: 'danger'
                 })
-
-                //navigate('/admin/sa')
             })
-    }, [])
+    }, [id, setAlert])
 
     return (
         <>
@@ -71,7 +60,6 @@ const EditSaloon = () => {
                 <div className="page-heading">
                     <h1>Grožio salono redagavimas</h1>
                 </div>
-                <Alert />
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="form-group mb-2">
                         <label className="mb-1">Pavadinimas:</label>
