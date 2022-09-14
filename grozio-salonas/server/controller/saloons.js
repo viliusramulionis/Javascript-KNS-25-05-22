@@ -14,6 +14,16 @@ Router.get('/', async (req, res) => {
     }
 })
 
+Router.get('/single/:id', async (req, res) => {
+    try {
+        const saloon = await db.Saloons.findByPk(req.params.id)
+        res.json(saloon)
+    } catch(error) {
+        console.log(error)
+        res.status(500).send('Įvyko klaida išssaugant duomenis')
+    }
+})
+
 Router.post('/new', saloonsValidator, async (req, res) => {
     try {
         await db.Saloons.create(req.body)

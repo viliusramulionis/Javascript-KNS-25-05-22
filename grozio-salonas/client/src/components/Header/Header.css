@@ -1,0 +1,40 @@
+.nav-link {
+    position: relative;
+    color: white;
+    transition: all .5s ease-in-out;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: white;
+    transition: all .5s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+    color: white;
+}
+
+.nav-link-active {
+    color: #ff5f91;
+}
+
+.nav-link-active:active,
+.nav-link-active:focus,
+.nav-link-active:hover {
+    color: white;
+}
+
+
+
+
