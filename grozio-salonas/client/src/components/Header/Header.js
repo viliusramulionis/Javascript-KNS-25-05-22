@@ -10,8 +10,8 @@ const Header = () => {
                 <a href="/" className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                     <img src={logo} alt="Beauty Parlor" style={{ maxWidth: '40px' }} />
                     <div className="d-block ms-3 lh-1">
-                        <h6 className="mb-0">Eglės Juočienės</h6>
-                        <span className="text-uppercase fs-7 fw-semibold">Grožio namai</span>
+                        <h6 className="mb-0">Lukio Bakšio</h6>
+                        <span className="text-uppercase fs-7 fw-semibold">Grožio salonų grupė</span>
                     </div>
                 </a>
 
@@ -31,38 +31,32 @@ const Header = () => {
                         >
                             Administratorius
                         </Link>
-                    </li>
-                    <li>
-                        <Link 
-                        to="/admin/saloons/new" 
-                        className="nav-link px-2"
-                        >
-                            Naujas grožio salonas
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                            to="/admin/services/" 
-                            className="nav-link px-2"
-                            >
-                                Paslaugos
-                            </Link>
-                    </li>
-                    <li>
-                        <Link 
-                            to="/admin/services/new" 
-                            className="nav-link px-2"
-                            >
-                                Nauja paslauga
-                            </Link>
-                    </li>
-                    <li>
-                        <Link 
-                            to="/admin/workers" 
-                            className="nav-link px-2"
-                            >
-                                Darbuotojai
-                            </Link>
+                        <ul>
+                            <li>
+                                <Link 
+                                    to="/admin/services/" 
+                                    className="nav-link px-2"
+                                    >
+                                        Paslaugos
+                                    </Link>
+                            </li>
+                            <li>
+                                <Link 
+                                    to="/admin/workers" 
+                                    className="nav-link px-2"
+                                    >
+                                        Darbuotojai
+                                    </Link>
+                            </li>
+                            <li>
+                                <Link 
+                                    to="/admin/orders" 
+                                    className="nav-link px-2"
+                                    >
+                                        Užsakymai
+                                    </Link>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
 

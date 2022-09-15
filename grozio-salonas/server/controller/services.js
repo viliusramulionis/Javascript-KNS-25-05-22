@@ -19,6 +19,16 @@ Router.get('/', async (req, res) => {
     }
 })
 
+Router.get('/single/:id', async (req, res) => {
+    try {
+        const service = await db.Services.findByPk(req.params.id)
+        res.json(service)
+    } catch(error) {
+        console.log(error)
+        res.status(500).send('Įvyko klaida išssaugant duomenis')
+    }
+})
+
 Router.post('/new', servicesValidator, async (req, res) => {
     try {
         await db.Services.create(req.body)

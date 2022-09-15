@@ -35,6 +35,35 @@
     color: white;
 }
 
+ul.nav li {
+    position: relative;
+} 
+
+ul.nav li:hover > ul {
+    max-height: 1000px;
+    padding: .7em 1rem .5rem 2.5rem;
+}
+
+ul.nav li > ul {
+    position: absolute;
+    left: 0;
+    background: rgba(33,37,41);
+    top: 41px;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: all .2s ease-in-out;
+}
+
+ul.nav li > ul > li > a::after {
+    display: none;
+}
+
+ul.nav li > ul > li > a:hover {
+    text-decoration: underline;
+}
 
 
 

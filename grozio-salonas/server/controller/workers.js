@@ -20,9 +20,22 @@ Router.get('/', async (req, res) => {
     }
 })
 
+Router.get('/single/:id', async (req, res) => {
+    try {
+        const worker = await db.Workers.findByPk(req.params.id, {
+            attributes: ['first_name', 'last_name', 'photo', 'saloonId']
+        })
+        res.json(worker)
+    } catch(error) {
+        console.log(error)
+        res.status(500).send('Įvyko klaida')
+    }
+})
+
 Router.post('/new', upload.single('photo'), workersValidator, async (req, res) => {
     try {
-        req.body.photo = '/uploads/' + req.file.filename
+        if(req.file)
+            req.body.photo = '/uploads/' + req.file.filename
 
         await db.Workers.create(req.body)
         res.send('Darbuotojas sėkmingai išsaugotas')

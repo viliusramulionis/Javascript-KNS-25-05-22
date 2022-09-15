@@ -5,7 +5,11 @@ import NewSaloon from './pages/admin/Saloons/New'
 import EditSaloon from './pages/admin/Saloons/Edit'
 import Services from './pages/admin/Services/Services'
 import NewService from './pages/admin/Services/New'
+import EditService from './pages/admin/Services/Edit'
 import Workers from './pages/admin/Workers/Workers'
+import NewWorker from './pages/admin/Workers/New'
+import EditWorker from './pages/admin/Workers/Edit'
+import Orders from './pages/admin/Orders/Orders'
 import MainContext from './context/MainContext'
 import Header from './components/Header/Header'
 import Alert from './components/Alert/Alert'
@@ -33,7 +37,11 @@ const App = () => {
               <Route path="saloons/edit/:id" element={<EditSaloon />} />
               <Route path="services" element={<Services />} />
               <Route path="services/new" element={<NewService />} />
+              <Route path="services/edit/:id" element={<EditService />} />
               <Route path="workers" element={<Workers />} />
+              <Route path="workers/new" element={<NewWorker />} />
+              <Route path="workers/edit/:id" element={<EditWorker />} />
+              <Route path="orders" element={<Orders />} />
             </Route>
           </Routes>
         </div>

@@ -38,8 +38,14 @@ const Saloons = () => {
 
     return (
         <>
-            <div className="page-heading">
+            <div className="d-flex justify-content-between page-heading">
                 <h1>Grožio salonai</h1>
+                <Link 
+                    to="/admin/saloons/new" 
+                    className="btn btn-success"
+                >
+                    Naujas salonas
+                </Link>
             </div>
             {saloons ?
                 <table className="table table-striped table-hover">

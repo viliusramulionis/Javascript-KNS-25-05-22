@@ -4,26 +4,23 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import MainContext from '../../../context/MainContext'
 
-const Services = () => {
-    const [services, setServices] = useState([])
+const Orders = () => {
+    const [orders, setOrders] = useState([])
+    const [refresh, setRefresh] = useState(false)
     const navigate = useNavigate()
     const { setAlert } = useContext(MainContext)
 
     const handleDelete = (id) => {
-        axios.delete('/api/services/delete/' + id)
+        axios.delete('/api/workers/delete/' + id)
         .then(resp => {
             setAlert({
                 message: resp.data,
                 status: 'success'
             })
 
-            window.scrollTo(0, 0)
+            setRefresh(!refresh)
 
-            setTimeout(() => {
-                setAlert({
-                    message: ''
-                })
-            }, 2000)
+            window.scrollTo(0, 0)
         })
         .catch(error => {
             console.log(error)
@@ -39,8 +36,8 @@ const Services = () => {
     }
 
     useEffect(() => {
-        axios.get('/api/services/')
-            .then(resp => setServices(resp.data))
+        axios.get('/api/orders/')
+            .then(resp => setOrders(resp.data))
             .catch(error => {
                 console.log(error)
                 setAlert({
@@ -48,43 +45,33 @@ const Services = () => {
                     status: 'danger'
                 })
             })
-    }, [setAlert])
+    }, [refresh, setAlert])
 
     return (
         <>
-            <div className="d-flex justify-content-between page-heading">
-                <h1>Paslaugos</h1>
-                <Link 
-                    to="/admin/services/new" 
-                    className="btn btn-success"
-                >
-                    Nauja Paslauga
-                </Link>
+            <div className="page-heading">
+                <h1>Užsakymai</h1>
             </div>
-            {services ?
+            {orders ?
                 <table className="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Pavadinimas</th>
-                            <th>Trukmė</th>
-                            <th>Kaina</th>
-                            <th>Salonas</th>
+                            <th>Užsakymo data</th>
+                            <th>Statusas</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {services.map(service =>
-                            <tr key={service.id}>
-                                <td>{service.id}</td>
-                                <td>{service.name}</td>
-                                <td>{service.duration}</td>
-                                <td>{service.price}</td>
-                                <td>{service.saloon?.name}</td>
+                        {orders.map(order =>
+                            <tr key={order.id}>
+                                <td>{order.id}</td>
+                                <td>{new Date(order.order_date).toLocaleString('lt-LT')}</td>
+                                <td>{order.status ? 'Patvirtintas' : 'Nepatvirtintas'}</td>
                                 <td>
                                     <div className="d-flex justify-content-end gap-2">
-                                        <Link to={'/admin/services/edit/' + service.id} className="btn btn-primary">Redaguoti</Link>
-                                        <button className="btn btn-warning" onClick={() => handleDelete(service.id)}>Ištrinti</button>
+                                        <Link to={'/admin/workers/edit/' + order.id} className="btn btn-primary">Redaguoti</Link>
+                                        <button className="btn btn-warning" onClick={() => handleDelete(order.id)}>Ištrinti</button>
                                     </div>
                                 </td>
                             </tr>
@@ -92,10 +79,10 @@ const Services = () => {
                     </tbody>
                 </table>
                 :
-                <h3>Nėra registruotų paslaugų</h3>
+                <h3>Nėra registruotų užsakymų</h3>
             }
         </>
     )
 }
 
-export default Services
+export default Orders
