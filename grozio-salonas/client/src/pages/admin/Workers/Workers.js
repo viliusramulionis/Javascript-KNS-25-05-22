@@ -50,7 +50,7 @@ const Workers = () => {
 
     return (
         <>
-            <div className="d-flex justify-content-between page-heading">
+            <div className="d-flex justify-content-between align-items-center page-heading">
                 <h1>Darbuotojai</h1>
                 <Link 
                     to="/admin/workers/new" 
