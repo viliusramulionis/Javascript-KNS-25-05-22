@@ -58,6 +58,8 @@ const Orders = () => {
                         <tr>
                             <th>#</th>
                             <th>Užsakymo data</th>
+                            <th>Klientas</th>
+                            <th>Paslauga</th>
                             <th>Statusas</th>
                             <th></th>
                         </tr>
@@ -67,11 +69,23 @@ const Orders = () => {
                             <tr key={order.id}>
                                 <td>{order.id}</td>
                                 <td>{new Date(order.order_date).toLocaleString('lt-LT')}</td>
+                                <td>{order.user && order.user.first_name + ' ' + order.user.last_name}</td>
+                                <td>{order.service?.name}</td>
                                 <td>{order.status ? 'Patvirtintas' : 'Nepatvirtintas'}</td>
                                 <td>
                                     <div className="d-flex justify-content-end gap-2">
-                                        <Link to={'/admin/workers/edit/' + order.id} className="btn btn-primary">Redaguoti</Link>
-                                        <button className="btn btn-warning" onClick={() => handleDelete(order.id)}>Ištrinti</button>
+                                        <Link 
+                                        to={'/admin/orders/edit/' + order.id} 
+                                        className="btn btn-primary"
+                                        >
+                                            Redaguoti
+                                        </Link>
+                                        <button 
+                                        className="btn btn-warning" 
+                                        onClick={() => handleDelete(order.id)}
+                                        >
+                                            Ištrinti
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
