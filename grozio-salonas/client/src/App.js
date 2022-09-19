@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+//Admino komponentai
 import Saloons from './pages/admin/Saloons/Saloons'
 import NewSaloon from './pages/admin/Saloons/New'
 import EditSaloon from './pages/admin/Saloons/Edit'
@@ -10,6 +11,10 @@ import Workers from './pages/admin/Workers/Workers'
 import NewWorker from './pages/admin/Workers/New'
 import EditWorker from './pages/admin/Workers/Edit'
 import Orders from './pages/admin/Orders/Orders'
+import EditOrder from './pages/admin/Orders/Edit'
+//Vartotojo komponentai
+import PublicSaloons from './pages/Saloons'
+
 import MainContext from './context/MainContext'
 import Header from './components/Header/Header'
 import Alert from './components/Alert/Alert'
@@ -31,6 +36,7 @@ const App = () => {
         <div className="container">
           <Alert />
           <Routes>
+            {/* Admin keliai */}
             <Route path="admin">
               <Route index element={<Saloons />} />
               <Route path="saloons/new" element={<NewSaloon />} />
@@ -42,7 +48,10 @@ const App = () => {
               <Route path="workers/new" element={<NewWorker />} />
               <Route path="workers/edit/:id" element={<EditWorker />} />
               <Route path="orders" element={<Orders />} />
+              <Route path="orders/edit/:id" element={<EditOrder />} />
             </Route>
+            {/* Vieši keliai */}
+            <Route path="/" element={<PublicSaloons />} />
           </Routes>
         </div>
       </MainContext.Provider>

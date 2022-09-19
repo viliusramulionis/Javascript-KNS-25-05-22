@@ -21,7 +21,7 @@ const Header = () => {
                         to="/" 
                         className="nav-link px-2 nav-link-active"
                         >
-                            Titulinis
+                            Salonai
                         </Link>
                     </li>
                     <li>

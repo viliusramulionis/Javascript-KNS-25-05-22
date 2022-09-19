@@ -42,9 +42,14 @@ const EditOrder = () => {
             })
     }
 
+    //Paimame prieš tai išssaugotą užsakymo informaciją
     useEffect(() => {
-        axios.get('/api/services/single/' + id)
-            .then(resp => setForm(resp.data))
+        axios.get('/api/orders/single/' + id)
+            .then(resp => {
+                resp.data.order_date = new Date(resp.data.order_date).toISOString().slice(0,16)
+                resp.data.status = resp.data.status ? '1' : '0'
+                setForm(resp.data)
+            })
             .catch(error => {
                 setAlert({
                     message: error.response.data,
@@ -53,48 +58,32 @@ const EditOrder = () => {
             })
     }, [id, setAlert])
 
-    useEffect(() => {
-        axios.get('/api/saloons/')
-        .then(resp => setSaloons(resp.data))
-        .catch(error => {
-            console.log(error)
-            setAlert({
-                message: error.response.data,
-                status: 'danger'
-            })
-        })
-    }, [setAlert])
-
     return (
         <>
             <div className="container mw-50">
                 <div className="page-heading">
-                    <h1>Paslaugos redagavimas</h1>
+                    <h1>Užsakymo redagavimas</h1>
                 </div>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="form-group mb-2">
-                        <label className="mb-1">Paslaugos pavadinimas:</label>
-                        <input type="text" name="name" className="form-control" onChange={handleForm} value={form.name} />
+                        <label className="mb-1">Užsakymo data:</label>
+                        <input 
+                            type="datetime-local" 
+                            name="order_date" 
+                            className="form-control" 
+                            onChange={handleForm} 
+                            value={form.order_date} 
+                        />
                     </div>
                     <div className="form-group mb-2">
-                        <label className="mb-1">Paslaugos trukmė:</label>
-                        <input type="text" name="duration" className="form-control" onChange={handleForm} value={form.duration} />
-                    </div>
-                    <div className="form-group mb-2">
-                        <label className="mb-1">Kaina:</label>
-                        <input type="number" step="any" name="price" className="form-control" onChange={handleForm} value={form.price} />
-                    </div>
-                    <div className="form-group mb-2">
-                        <label className="mb-1">Grožio salonas:</label>
+                        <label className="mb-1">Užsakymo statusas:</label>
                         <select 
-                        name="saloonId" 
-                        onChange={handleForm} 
-                        className="form-control" 
-                        value={form.saloonId ? form.saloonId : ''}
+                            name="status" 
+                            onChange={handleForm} 
+                            value={form.status}
                         >
-                            {saloons.map(saloon => 
-                                <option key={saloon.id} value={saloon.id}>{saloon.name}</option>
-                            )}
+                            <option value="0">Nepatvirtintas</option>
+                            <option value="1">Patvirtintas</option>
                         </select>
                     </div>
                     <button className="btn btn-primary">Išsaugoti</button>

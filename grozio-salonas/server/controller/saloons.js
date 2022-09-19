@@ -5,8 +5,22 @@ import { saloonsValidator } from '../middleware/validate.js'
 const Router = express.Router()
 
 Router.get('/', async (req, res) => {
+    const options = {}
+
+    if(req.query.sort === '1') {
+        options.order = [
+            ['name', 'ASC']
+        ]
+    }
+
+    if(req.query.sort === '2') {
+        options.order = [
+            ['name', 'DESC']
+        ]
+    }
+
     try {
-        const saloons = await db.Saloons.findAll()
+        const saloons = await db.Saloons.findAll(options)
         res.json(saloons)
     } catch(error) {
         console.log(error)

@@ -11,7 +11,7 @@ const Orders = () => {
     const { setAlert } = useContext(MainContext)
 
     const handleDelete = (id) => {
-        axios.delete('/api/workers/delete/' + id)
+        axios.delete('/api/orders/delete/' + id)
         .then(resp => {
             setAlert({
                 message: resp.data,
