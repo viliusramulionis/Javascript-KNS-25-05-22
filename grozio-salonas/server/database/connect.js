@@ -45,6 +45,9 @@ try {
 
     database.Workers.hasMany(database.Ratings)
     database.Ratings.belongsTo(database.Workers)
+
+    database.Workers.hasMany(database.Orders)
+    database.Orders.belongsTo(database.Workers)
     
 
     await sequelize.sync({ alter: true })

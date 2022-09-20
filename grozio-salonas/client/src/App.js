@@ -14,6 +14,8 @@ import Orders from './pages/admin/Orders/Orders'
 import EditOrder from './pages/admin/Orders/Edit'
 //Vartotojo komponentai
 import PublicSaloons from './pages/Saloons'
+import PublicWorkers from './pages/Workers'
+import NewOrder from './pages/NewOrder'
 
 import MainContext from './context/MainContext'
 import Header from './components/Header/Header'
@@ -52,6 +54,8 @@ const App = () => {
             </Route>
             {/* Vieši keliai */}
             <Route path="/" element={<PublicSaloons />} />
+            <Route path="/workers" element={<PublicWorkers />} />
+            <Route path="/new-order/:saloonId" element={<NewOrder />} />
           </Routes>
         </div>
       </MainContext.Provider>
