@@ -22,20 +22,21 @@ Router.get('/', async (req, res) => {
             attributes: {
                 include: [
                     [Sequelize.fn('AVG', Sequelize.col('ratings.rating')), 'total_rating']
-                ],
+                ]
             },
-            group: [
-                'id'
-            ],
-            order: [ 
-                [Sequelize.literal('total_rating'), 'DESC'],
-            ]
+            group: ['id']
         }
 
         if(req.query.saloon)
             options.where = {
                 saloonId: req.query.saloon
             }
+
+        if(req.query.sorting) {
+            options.order = [
+                [Sequelize.literal('total_rating'), req.query.sorting === '1' ? 'ASC' : 'DESC']
+            ]
+        }
 
         const workers = await db.Workers.findAll(options)
         res.json(workers)

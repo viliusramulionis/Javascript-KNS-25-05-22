@@ -7,31 +7,44 @@ const Workers = () => {
     const [workers, setWorkers] = useState([])
     const [saloons, setSaloons] = useState([])
     const [selectedSaloon, setSelectedSaloon] = useState('0')
+    const [selectedSorting, setSelectedSorting] = useState('0')
     const { setAlert } = useContext(MainContext)
 
     const handleFilter = (e) => {
         setSelectedSaloon(e.target.value)
     }
 
+    const handleSorting = (e) => {
+        setSelectedSorting(e.target.value)
+    }
+
     useEffect(() => {
-        let url = '/api/workers/'
+        let url = '/api/workers/?'
+
+        const searchParams = new URLSearchParams()
         
         if(selectedSaloon !== '0')
-            url += '?saloon=' + selectedSaloon
+            searchParams.append('saloon', selectedSaloon)
+
+        if(selectedSorting !== '0')
+            searchParams.append('sorting', selectedSorting)
+
+        url += searchParams.toString()
+
         console.log(url)
         axios.get(url)
         .then(resp => {
             //Laikinas sprendimas
-            const workers = resp.data.map(worker => {
-                if(worker.ratings.length > 0) {
-                    let sum = 0
-                    worker.ratings.map(r => sum += r.rating)
-                    worker.total_rating = (sum / worker.ratings.length).toFixed(2)
-                }
+            // const workers = resp.data.map(worker => {
+            //     if(worker.ratings.length > 0) {
+            //         let sum = 0
+            //         worker.ratings.map(r => sum += r.rating)
+            //         worker.total_rating = (sum / worker.ratings.length).toFixed(2)
+            //     }
 
-                return worker
-            })
-            setWorkers(workers)
+            //     return worker
+            // })
+            setWorkers(resp.data)
         })
         .catch(error => {
             console.log(error)
@@ -40,7 +53,7 @@ const Workers = () => {
                 status: 'danger'
             })
         })
-    }, [selectedSaloon])
+    }, [selectedSaloon, selectedSorting])
 
     useEffect(() => {
         axios.get('/api/saloons/')
@@ -65,12 +78,17 @@ const Workers = () => {
                     )}
                 </select>
             }
+            <select onChange={handleSorting}>
+                <option value="0">Pasirinkite rūšiavimą</option>
+                <option value="1">Pagal įvertinimą didėjančia tvarka</option>
+                <option value="2">Pagal įvertinimą mažėjančia tvarka</option>
+            </select>
             {workers && workers.map(worker => 
                 <div key={worker.id}>
                     <img src={worker.photo} />
                     <h4>{worker.first_name + ' ' + worker.last_name}</h4>
                     <div>{worker.saloon.name}</div>
-                    <div>Įvertinimas: {worker.total_rating}</div>
+                    <div>Įvertinimas: {parseFloat(worker.total_rating).toFixed(2)}</div>
                 </div>
             )}
         </>
