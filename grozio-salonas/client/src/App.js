@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import axios from 'axios'
+
 //Admino komponentai
 import Saloons from './pages/admin/Saloons/Saloons'
 import NewSaloon from './pages/admin/Saloons/New'
@@ -18,7 +20,14 @@ import PublicWorkers from './pages/Workers'
 import PublicNewOrder from './pages/NewOrder'
 import PublicOrders from './pages/Orders'
 
+//Autentifikacijos komponentai
+import Login from './pages/Login'
+import Register from './pages/Register'
+
+//Kontekstas
 import MainContext from './context/MainContext'
+
+//Baziniai komponentai
 import Header from './components/Header/Header'
 import Alert from './components/Alert/Alert'
 import './App.css';
@@ -29,8 +38,16 @@ const App = () => {
     message: '',
     status: ''
   })
+  const [userInfo, setUserInfo] = useState({})
 
-  const contextValues = { alert, setAlert }
+  const contextValues = { alert, setAlert, userInfo, setUserInfo }
+
+  useEffect(() => {
+    axios.get('/api/users/check-auth/')
+    .then(resp => {
+      setUserInfo(resp.data)
+    })
+  }, [])
 
   return (
     <BrowserRouter>
@@ -55,9 +72,11 @@ const App = () => {
             </Route>
             {/* Vieši keliai */}
             <Route path="/" element={<PublicSaloons />} />
-            <Route path="/workers" element={<PublicWorkers />} />
-            <Route path="/new-order/:saloonId" element={<PublicNewOrder />} />
-            <Route path="/orders" element={<PublicOrders />} />
+            <Route path="workers" element={<PublicWorkers />} />
+            <Route path="new-order/:saloonId" element={<PublicNewOrder />} />
+            <Route path="orders" element={<PublicOrders />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
           </Routes>
         </div>
       </MainContext.Provider>

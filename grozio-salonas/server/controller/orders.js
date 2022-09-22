@@ -39,8 +39,10 @@ Router.get('/user/', async (req, res) => {
                     model: db.Services, 
                     include: db.Saloons
                 }, 
-                db.Workers
-            ]
+                db.Workers,
+                db.Ratings
+            ],
+            group: ['id']
         })
         res.json(orders)
     } catch(error) {

@@ -1,8 +1,28 @@
-import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import MainContext from '../../context/MainContext'
+import axios from 'axios'
 import logo from './Logo.svg'
 import './Header.css'
 
 const Header = () => {
+    const { userInfo, setUserInfo, setAlert } = useContext(MainContext)
+
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        axios.get('/api/users/logout/')
+        .then(resp => {
+            setUserInfo({})
+            setAlert({
+                message: resp.data,
+                status: 'success'
+            })
+
+            navigate('/')
+        })
+    }
+
     return (
         <header className="p-3 text-bg-dark">
             <div className="container">
@@ -69,8 +89,14 @@ const Header = () => {
                 </ul>
 
                 <div className="text-end">
-                    <button type="button" className="btn btn-outline-light me-2">Prisijungimas</button>
-                    <button type="button" className="btn btn-primary">Registracija</button>
+                    {userInfo.id ? 
+                        <button onClick={handleLogout} className="btn btn-primary">Atsijungti</button>
+                        :
+                        <>
+                            <Link to="/login" className="btn btn-outline-light me-2">Prisijungimas</Link>
+                            <Link to="/register" className="btn btn-primary">Registracija</Link>
+                        </>
+                    }
                 </div>
             </div>
             </div>
