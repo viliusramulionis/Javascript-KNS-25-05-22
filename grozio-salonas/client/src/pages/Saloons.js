@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import { Link } from 'react-router-dom'
 import MainContext from '../context/MainContext'
 import axios from 'axios'
 
@@ -39,6 +40,11 @@ const Saloons = () => {
                     <div><strong>{saloon.name}</strong></div>
                     <div>{saloon.address}</div>
                     <div>{saloon.phone}</div>
+                    <div>
+                        <Link to={'/new-order/' + saloon.id} className="btn btn-primary">
+                            Rezervuoti laiką
+                        </Link>
+                    </div>
                 </div>
             )}
         </>

@@ -5,7 +5,11 @@ import { ratingsValidator } from '../middleware/validate.js'
 const router = express.Router()
 
 router.post('/worker/:id', ratingsValidator, async (req, res) => {
+    //Laikinas sprendimas
+    const userId = 1
+
     req.body.workerId = req.params.id
+    req.body.userId = userId
 
     try {
         await db.Ratings.create(req.body)

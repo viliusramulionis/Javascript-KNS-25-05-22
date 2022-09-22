@@ -2,6 +2,7 @@ import express from 'express'
 import db from '../database/connect.js'
 import upload from '../middleware/multer.js'
 import { workersValidator } from '../middleware/validate.js'
+import Sequelize from 'sequelize'
 
 const Router = express.Router()
 
@@ -17,6 +18,17 @@ Router.get('/', async (req, res) => {
                     model: db.Ratings,
                     attributes: ['rating']
                 }
+            ],
+            attributes: {
+                include: [
+                    [Sequelize.fn('AVG', Sequelize.col('ratings.rating')), 'total_rating']
+                ],
+            },
+            group: [
+                'id'
+            ],
+            order: [ 
+                [Sequelize.literal('total_rating'), 'DESC'],
             ]
         }
 

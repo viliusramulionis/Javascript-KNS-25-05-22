@@ -99,7 +99,8 @@ export const ordersValidator = (req, res, next) => {
     const schema = Joi.object({
         order_date: Joi.date().required(),
         status: Joi.number().integer(),
-        serviceId: Joi.number().integer().required()
+        serviceId: Joi.number().integer().required(),
+        workerId: Joi.number().integer().required()
     })
 
     validate(schema, req, res, next)

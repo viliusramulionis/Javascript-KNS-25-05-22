@@ -26,6 +26,14 @@ const Header = () => {
                     </li>
                     <li>
                         <Link 
+                        to="/orders" 
+                        className="nav-link px-2"
+                        >
+                            Užsakymai
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
                         to="/admin" 
                         className="nav-link px-2"
                         >
