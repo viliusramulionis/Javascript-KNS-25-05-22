@@ -88,7 +88,9 @@ const Workers = () => {
                     <img src={worker.photo} />
                     <h4>{worker.first_name + ' ' + worker.last_name}</h4>
                     <div>{worker.saloon.name}</div>
-                    <div>Įvertinimas: {parseFloat(worker.total_rating).toFixed(2)}</div>
+                    {worker.total_rating && 
+                        <div>Įvertinimas: {parseFloat(worker.total_rating).toFixed(2)}</div>
+                    }
                 </div>
             )}
         </>

@@ -1,11 +1,12 @@
 import express from 'express'
 import db from '../database/connect.js'
 import { ordersValidator } from '../middleware/validate.js'
+import { auth, adminAuth } from '../middleware/auth.js'
 
 const Router = express.Router()
 
 //Admino užsakymų sąrašas
-Router.get('/', async (req, res) => {
+Router.get('/', adminAuth, async (req, res) => {
     try {
         const orders = await db.Orders.findAll({
             include: [
@@ -27,9 +28,9 @@ Router.get('/', async (req, res) => {
 })
 
 //Vartotojo užsakymai
-Router.get('/user/', async (req, res) => {
+Router.get('/user/', auth, async (req, res) => {
     //Laikinas sprendimas
-    const user_id = 1
+    const user_id = req.session.user.id
 
     try {
         const orders = await db.Orders.findAll({
@@ -51,7 +52,7 @@ Router.get('/user/', async (req, res) => {
     }
 })
 
-Router.get('/single/:id', async (req, res) => {
+Router.get('/single/:id', adminAuth, async (req, res) => {
     try {
         const orders = await db.Orders.findByPk(req.params.id)
         res.json(orders)
@@ -61,8 +62,10 @@ Router.get('/single/:id', async (req, res) => {
     }
 })
 
-Router.post('/new', ordersValidator, async (req, res) => {
+Router.post('/new', auth, ordersValidator, async (req, res) => {
     try {
+        req.body.userId = req.session.user.id
+        
         await db.Orders.create(req.body)
         res.send('Užsakymas sėkmingai sukurtas')
     } catch(error) {
@@ -71,7 +74,7 @@ Router.post('/new', ordersValidator, async (req, res) => {
     }
 })
 
-Router.put('/edit/:id', ordersValidator, async (req, res) => {
+Router.put('/edit/:id', adminAuth, ordersValidator, async (req, res) => {
     try {
         const order = await db.Orders.findByPk(req.params.id)
         await order.update(req.body)
@@ -82,7 +85,7 @@ Router.put('/edit/:id', ordersValidator, async (req, res) => {
     }
 })
 
-Router.delete('/delete/:id', async (req, res) => {
+Router.delete('/delete/:id', adminAuth, async (req, res) => {
     try {
         const order = await db.Orders.findByPk(req.params.id)
         await order.destroy()

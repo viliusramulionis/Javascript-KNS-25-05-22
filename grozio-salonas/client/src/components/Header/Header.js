@@ -46,46 +46,58 @@ const Header = () => {
                     </li>
                     <li>
                         <Link 
-                        to="/orders" 
+                        to="/workers" 
                         className="nav-link px-2"
                         >
-                            Užsakymai
+                            Darbuotojai
                         </Link>
                     </li>
-                    <li>
-                        <Link 
-                        to="/admin" 
-                        className="nav-link px-2"
-                        >
-                            Administratorius
-                        </Link>
-                        <ul>
-                            <li>
-                                <Link 
-                                    to="/admin/services/" 
-                                    className="nav-link px-2"
-                                    >
-                                        Paslaugos
-                                    </Link>
-                            </li>
-                            <li>
-                                <Link 
-                                    to="/admin/workers" 
-                                    className="nav-link px-2"
-                                    >
-                                        Darbuotojai
-                                    </Link>
-                            </li>
-                            <li>
-                                <Link 
-                                    to="/admin/orders" 
-                                    className="nav-link px-2"
-                                    >
-                                        Užsakymai
-                                    </Link>
-                            </li>
-                        </ul>
-                    </li>
+                    {userInfo.role === 0 && 
+                        <li>
+                            <Link 
+                            to="/orders" 
+                            className="nav-link px-2"
+                            >
+                                Užsakymai
+                            </Link>
+                        </li>
+                    }
+                    {userInfo.role === 1 &&
+                        <li>
+                            <Link 
+                            to="/admin" 
+                            className="nav-link px-2"
+                            >
+                                Administratorius
+                            </Link>
+                            <ul>
+                                <li>
+                                    <Link 
+                                        to="/admin/services/" 
+                                        className="nav-link px-2"
+                                        >
+                                            Paslaugos
+                                        </Link>
+                                </li>
+                                <li>
+                                    <Link 
+                                        to="/admin/workers" 
+                                        className="nav-link px-2"
+                                        >
+                                            Darbuotojai
+                                        </Link>
+                                </li>
+                                <li>
+                                    <Link 
+                                        to="/admin/orders" 
+                                        className="nav-link px-2"
+                                        >
+                                            Užsakymai
+                                        </Link>
+                                </li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
 
                 <div className="text-end">

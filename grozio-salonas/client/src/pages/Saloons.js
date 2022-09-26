@@ -6,7 +6,7 @@ import axios from 'axios'
 const Saloons = () => {
     const [saloons, setSaloons] = useState([])
     const [sort, setSort] = useState('')
-    const { setAlert } = useContext(MainContext)
+    const { setAlert, userInfo } = useContext(MainContext)
 
     useEffect(() => {
         let url = '/api/saloons/'
@@ -41,7 +41,10 @@ const Saloons = () => {
                     <div>{saloon.address}</div>
                     <div>{saloon.phone}</div>
                     <div>
-                        <Link to={'/new-order/' + saloon.id} className="btn btn-primary">
+                        <Link 
+                            to={userInfo.id ? '/new-order/' + saloon.id : '/login'} 
+                            className="btn btn-primary"
+                        >
                             Rezervuoti laiką
                         </Link>
                     </div>

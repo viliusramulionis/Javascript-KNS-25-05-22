@@ -1,6 +1,7 @@
 import express from 'express'
 import db from '../database/connect.js'
 import { saloonsValidator } from '../middleware/validate.js'
+import { adminAuth } from '../middleware/auth.js'
 
 const Router = express.Router()
 
@@ -28,7 +29,7 @@ Router.get('/', async (req, res) => {
     }
 })
 
-Router.get('/single/:id', async (req, res) => {
+Router.get('/single/:id', adminAuth, async (req, res) => {
     try {
         const saloon = await db.Saloons.findByPk(req.params.id)
         res.json(saloon)
@@ -38,7 +39,7 @@ Router.get('/single/:id', async (req, res) => {
     }
 })
 
-Router.post('/new', saloonsValidator, async (req, res) => {
+Router.post('/new', adminAuth, saloonsValidator, async (req, res) => {
     try {
         await db.Saloons.create(req.body)
         res.send('Salonas sėkmingai sukurtas')
@@ -48,7 +49,7 @@ Router.post('/new', saloonsValidator, async (req, res) => {
     }
 })
 
-Router.put('/edit/:id', saloonsValidator, async (req, res) => {
+Router.put('/edit/:id', adminAuth, saloonsValidator, async (req, res) => {
     try {
         const saloon = await db.Saloons.findByPk(req.params.id)
         await saloon.update(req.body)
@@ -59,7 +60,7 @@ Router.put('/edit/:id', saloonsValidator, async (req, res) => {
     }
 })
 
-Router.delete('/delete/:id', async (req, res) => {
+Router.delete('/delete/:id', adminAuth, async (req, res) => {
     try {
         const saloon = await db.Saloons.findByPk(req.params.id)
         await saloon.destroy()

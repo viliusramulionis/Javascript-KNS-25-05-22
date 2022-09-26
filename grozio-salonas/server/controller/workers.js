@@ -3,6 +3,7 @@ import db from '../database/connect.js'
 import upload from '../middleware/multer.js'
 import { workersValidator } from '../middleware/validate.js'
 import Sequelize from 'sequelize'
+import { adminAuth } from '../middleware/auth.js'
 
 const Router = express.Router()
 
@@ -46,7 +47,7 @@ Router.get('/', async (req, res) => {
     }
 })
 
-Router.get('/single/:id', async (req, res) => {
+Router.get('/single/:id', adminAuth, async (req, res) => {
     try {
         const worker = await db.Workers.findByPk(req.params.id, {
             attributes: ['first_name', 'last_name', 'photo', 'saloonId']
@@ -58,7 +59,7 @@ Router.get('/single/:id', async (req, res) => {
     }
 })
 
-Router.post('/new', upload.single('photo'), workersValidator, async (req, res) => {
+Router.post('/new', adminAuth, upload.single('photo'), workersValidator, async (req, res) => {
     try {
         if(req.file)
             req.body.photo = '/uploads/' + req.file.filename
@@ -71,7 +72,7 @@ Router.post('/new', upload.single('photo'), workersValidator, async (req, res) =
     }
 })
 
-Router.put('/edit/:id', upload.single('photo'), workersValidator, async (req, res) => {
+Router.put('/edit/:id', adminAuth, upload.single('photo'), workersValidator, async (req, res) => {
     try {
         if(req.file)
             req.body.photo = '/uploads/' + req.file.filename
@@ -85,7 +86,7 @@ Router.put('/edit/:id', upload.single('photo'), workersValidator, async (req, re
     }
 })
 
-Router.delete('/delete/:id', async (req, res) => {
+Router.delete('/delete/:id', adminAuth, async (req, res) => {
     try {
         const worker = await db.Workers.findByPk(req.params.id)
         await worker.destroy()
